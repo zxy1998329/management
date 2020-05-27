@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head(title='缴费信息')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='pay')"></div>
+<!-- //整个导航栏 -->
+<!-- contact -->
+<div class="contact agileits" style="height:600px">
+    <div class="container">
+        <h3 class="agileits-title" th:text="'账户：'+${account.userName}"></h3>
+
+        <h2>水费余额<span class="label label-default" th:text="${pay.water}"></span></h2>
+        <a th:href="@{/payment_water/}+${pay.id}" ><button type="button" class="btn btn-default">缴费</button></a>
+        <div style="height:20px"></div>
+
+        <h2>电费余额<span class="label label-default" th:text="${pay.electric}"></span></h2>
+        <a th:href="@{/payment_electric/}+${pay.id}" ><button type="button" class="btn btn-default">缴费</button></a>
+        <div style="height:20px"></div>
+
+        <h2>气费余额<span class="label label-default" th:text="${pay.gas}"></span></h2>
+        <a th:href="@{/payment_gas/}+${pay.id}"><button type="button" class="btn btn-default">缴费</button></a>
+        <div style="height:20px"></div>
+
+        <h2>物管费余额<span class="label label-default" th:text="${pay.manage}"></span></h2>
+        <a th:href="@{/payment_manage/}+${pay.id}"><button type="button" class="btn btn-default">缴费</button></a>
+        <div class="clearfix"> </div>
+    </div>
+</div>
+</div>
+<!-- //contact -->
+<!-- //footer end here -->
+<!-- js -->
+<script src="js/jquery-2.2.3.min.js"></script>
+<!-- //js -->
+<!-- start-smooth-scrolling -->
+<script src="js/SmoothScroll.min.js"></script>
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".scroll").click(function(event){
+					event.preventDefault();
+
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+				});
+			});
+	</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+			};
+			*/
+
+			$().UItoTop({ easingType: 'easeOutQuart' });
+
+		});
+	</script>
+<!-- //smooth-scrolling-of-move-up -->
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/bootstrap.js"></script>
+</body>
+</html>

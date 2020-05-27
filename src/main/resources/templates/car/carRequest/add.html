@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='添加车辆申请')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='car')"></div>
+<!-- //整个导航栏 -->
+<div style="height:50px"></div>
+<div style="height:600px; width:50%; margin:0 auto">
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <form th:action="@{/carRequest}" method="post">
+            <div class="form-group">
+                <label>牌照号</label>
+                <input name="license" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>车辆品牌</label>
+                <input name="brand" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>车辆颜色</label>
+                <select class="form-control" name="color">
+                    <option value="red">红色</option>
+                    <option value="orange">橙色</option>
+                    <option value="yellow">黄色</option>
+                    <option value="green">绿色</option>
+                    <option value="black">黑色</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" th:text="请求添加车辆"></button>
+        </form>
+    </main>
+</div>
+</body>
+</html>

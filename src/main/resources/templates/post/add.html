@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title=${post==null}?'添加帖子':'修改帖子')"></head>
+<body>
+<div th:replace="commons::topper(uri='post')"></div>
+
+    <div style="width:30%;margin:0 auto">
+        <form th:action="@{/post}" method="post">
+            <!--选择添加还是修改的PUT和POST-->
+            <input type="hidden" name="_method" value="put" th:if="${post!=null}">
+            <!--把id也提交上去，方便controller修改-->
+            <input  type="hidden" name="id" th:value="${post.id}" th:if="${post!=null}">
+            <!--标题-->
+            <div class="page-header">
+                <h4>标题</h4>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1"></label>
+                <input type="text" class="form-control" id="exampleFormControlInput1" th:value="${post!=null}?${post.title}" name="title">
+            </div>
+
+            <!--内容-->
+            <div class="page-header">
+                <h4>内容</h4>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1"></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" th:text="${post!=null}?${post.content}" name="content"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>板块</label>
+                <select class="form-control" name="part">
+                    <option value="1" th:selected="${post!=null}?${post.part}=='1'">小区事儿</option>
+                    <option value="2" th:selected="${post!=null}?${post.part}=='2'">交友互助</option>
+                    <option value="3" th:selected="${post!=null}?${post.part}=='3'">兴趣圈子</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" th:text="${post!=null}?'修改':'添加'">添加</button>
+        </form>
+    </div>
+
+</body>
+</html>

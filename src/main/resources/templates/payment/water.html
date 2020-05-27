@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="commons::head(title='水费')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='pay')"></div>
+<!-- //整个导航栏 -->
+<div class="row" >
+
+    <form action="payment_water" method="post" class="form-inline" style="margin-left:18px">
+        <div class="form-group">
+            <input name="money" class="form-control" type="text" placeholder="请输入金额">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default">缴费</button>
+        </div>
+    </form>
+</div><!-- /.row -->
+
+
+
+
+</body>
+</html>

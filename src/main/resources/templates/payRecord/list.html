@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='缴费记录')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='pay')"></div>
+<!-- //整个导航栏 -->
+
+<div style="height:10px"></div>
+
+<div class="table-responsive" style="height:700px">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>用户</th>
+            <th>缴费类型</th>
+            <th>金额</th>
+            <th>日期</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="payRecord:${payRecords}">
+            <td th:text="${payRecord.ownerUserName}"></td>
+            <td th:if="${payRecord.type==1}">水费</td>
+            <td th:if="${payRecord.type==2}">电费</td>
+            <td th:if="${payRecord.type==3}">气费</td>
+            <td th:if="${payRecord.type==4}">物业</td>
+            <td th:text="${payRecord.money}"></td>
+            <td th:text="${#dates.format(payRecord.date , 'yyyy年MM月dd日HH时mm分')}"></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='车辆管理')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='car')"></div>
+<!-- //整个导航栏 -->
+
+<div style="height:10px"></div>
+<h2>
+    <a class="btn btn-sm btn-success" th:href="@{/car}" th:if="${session.vip==true}">添加车辆</a>
+    <a class="btn btn-sm btn-success" th:text="${session.vip}? '审核添加请求': '请求添加车辆' "
+        th:href="${session.vip}?@{/carRequests}:@{/carRequest}">
+    </a>
+    <a class="btn btn-sm btn-success" th:href="@{/carRequest/}+${session.userName}"
+       th:if="${!session.vip}">查看请求审核
+    </a>
+</h2>
+<div class="table-responsive" style="height:700px">
+    <table class="table table-striped table-sm">
+        <thead>
+        <tr>
+            <th>用户名</th>
+            <th>真实姓名</th>
+            <th>车辆牌照</th>
+            <th>品牌</th>
+            <th>颜色</th>
+            <th>登记日期</th>
+            <th th:if="${session.vip==true}" >操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="car:${cars}">
+            <td th:text="${car.ownerUserName}"></td>
+            <td th:text="${car.ownerRealName}"></td>
+            <td th:text="${car.license}"></td>
+            <td th:text="${car.brand}"></td>
+            <td th:text="${car.color}"></td>
+            <td th:text="${#dates.format(car.date , 'yyyy年MM月dd日')}"></td>
+            <td th:if="${session.vip==true}">
+                <a class="btn btn-sm btn-primary" th:href="@{/car/}+${car.id}">编辑</a>
+                <form th:action="@{/car/}+${car.id}" method="post" style="display:inline-block; ">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button type="submit" class="btn btn-sm btn-danger">删除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head(title='公告栏管理')"></head>
+<body>
+<div th:replace="commons::topper(uri='')"></div>
+
+<h2><div style="margin:20px auto;width:100px"><a class="btn btn-sm btn-success" th:href="@{/notice}" >添加公告</a></div></h2>
+<!--公告栏-->
+<div class="panel panel-default" style="height:400px; width:350px;float:left;" th:each="notice:${notices}">
+    <a class="btn btn-sm btn-primary" th:href="@{/notice/}+${notice.id}">修改</a>
+    <form th:action="@{/notice/}+${notice.id}" method="post" style="display:inline-block; ">
+        <input type="hidden" name="_method" value="delete"/>
+        <button type="submit" class="btn btn-sm btn-danger">删除</button>
+    </form>
+
+    <div class="panel-heading" th:text="'标题：'+${notice.title}"></div>
+    <div class="panel-heading" th:text="'时间：'+${#dates.format(notice.publishDate,'yyyy-MM-dd/HH:mm')}"></div>
+    <div class="panel-body" th:text="${notice.content}"></div>
+
+</div>
+
+
+</body>
+</html>

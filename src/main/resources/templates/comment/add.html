@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='添加评论')"></head>
+<body>
+<div th:replace="commons::topper(uri='post')"></div>
+
+<div style="width:30%;margin:0 auto">
+    <form th:action="@{/comment}" method="post">
+        <!--把postId提交上去-->
+        <input type="hidden" name="postId" th:value="${postId}">
+
+        <!--内容-->
+        <div class="page-header">
+            <h4>内容</h4>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1"></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">发布评论</button>
+    </form>
+</div>
+
+</body>
+</html>

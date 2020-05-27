@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <title th:text="'物业管理系统 - ' + ${title} "></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="http://localhost:8080/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="http://localhost:8080/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="http://localhost:8080/css/font-awesome.css" rel="stylesheet">		<!-- font-awesome icons -->
+    <!-- //Custom Theme files -->
+    <!-- web-fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- //web-fonts -->
+</head>
+<body>
+
+
+<!-- 整个导航栏 -->
+<div class="agileits-banner about-w3lsbnr" th:fragment="topper(uri)">
+    <div class="bnr-agileinfo">
+        <!-- 顶部导航栏 -->
+        <div class="top-nav w3-agiletop">
+            <div class="container">
+                <div class="navbar-header w3llogo">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1><a href="/homepage">物业管理系统<span>ZXY提供</span> </a></h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="w3menu navbar-right">
+                        <ul class="nav navbar">
+                            <li><a href="/homepage">主页</a></li>
+                            <li><a href="/posts" th:class="${uri=='post'}?'active'">社区</a></li>
+                            <li><a th:href="${session.vip}?@{/cars}:(@{/myCar/}+${session.id})" th:class="${uri=='car'}?'active'"
+                                   th:text="${session.vip}?'车辆管理':'我的车辆'"></a></li>
+                            <li><a th:href="${session.vip}?@{/accounts}:@{/pay}" th:class="${uri=='pay'}?'active'"
+                                   th:text="${session.vip}?'管理业主':'缴费信息'"></a></li>
+
+                            <li><a href="/info" th:text="'你好，'+${session.nickName}" th:class="${uri=='info'}?'active'"></a></li>
+                            <li><a href="/out">退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- //顶部导航栏 -->
+        <!-- banner-test -->
+        <div class="banner-w3text about-w3lsbnr-text">
+            <div class="container">
+                <h2></h2>
+            </div>
+        </div>
+        <!-- //banner-test -->
+    </div>
+</div>
+<!-- //整个导航栏 -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='社区')"></head>
+<body>
+    <div th:replace="commons::topper(uri='post')"></div>
+
+    <div style="width:60%; margin:10px auto;">
+
+        <ul class="nav nav-tabs">
+            <li role="presentation" th:class="${part==0}?'active'"><a href="/posts">所有帖子</a></li>
+            <li role="presentation" th:class="${part==1}?'active'"><a href="/posts/1">小区事儿</a></li>
+            <li role="presentation" th:class="${part==2}?'active'"><a href="/posts/2">交友互助</a></li>
+            <li role="presentation" th:class="${part==3}?'active'"><a href="/posts/3">兴趣圈子</a></li>
+            <a class="btn btn-primary navbar-btn" href="/myposts"
+               th:text="${session.vip}?'管理帖子':'我的帖子'" style="float:right; margin-left:20px">
+            </a>
+            <a class="btn btn-primary navbar-btn" href="/liuyans" style="float:right">我的私信</a>
+        </ul>
+
+        <!--选择板块-->
+        <!--<div>-->
+            <!--<a class="btn btn-default navbar-btn" href="/posts">所有帖子</a>-->
+            <!--<a class="btn btn-default navbar-btn" href="/posts/1">小区事儿</a>-->
+            <!--<a class="btn btn-default navbar-btn" href="/posts/2">交友互助</a>-->
+            <!--<a class="btn btn-default navbar-btn" href="/posts/3">兴趣圈子</a>-->
+            <!--<a class="btn btn-primary navbar-btn" href="/myposts"-->
+               <!--th:test="${session.vip}?'管理帖子':'我的帖子'" style="float:right; margin-left:20px">-->
+            <!--</a>-->
+            <!--<a class="btn btn-primary navbar-btn" href="/liuyans" style="float:right">我的留言板</a>-->
+        <!--</div>-->
+        <!--选择板块-->
+
+        <!--帖子-->
+        <div class="panel panel-info" style="  margin:30px 0" th:each="post:${posts}" th:switch="${post.part}">
+            <a class="btn btn-success navbar-btn" th:href="@{/liuyan?}+'ownerId='+${post.ownerId}+'&postTitle='+${post.title} " style="float:right;top:-5px;position:relative">给他私信</a>
+            <a class="btn btn-success navbar-btn" th:href="@{/comment/}+${post.id} " style="float:right;top:-5px;position:relative;margin-right:10px">评论</a>
+            <div class="panel-heading" th:text="'发帖人：'+${post.ownerNickName}"></div>
+            <div class="panel-heading" th:text="'标题：'+${post.title}"></div>
+            <div class="panel-heading" th:text="'发帖时间：'+${#dates.format(post.date,'yyyy-MM-dd &nbsp; HH:mm')}"></div>
+            <div class="panel-heading" th:case="1">板块：小区事儿</div>
+            <div class="panel-heading" th:case="2">板块：交友互助</div>
+            <div class="panel-heading" th:case="3">板块：兴趣圈子</div>
+            <div class="panel-body" th:text="${post.content}" style="height:300px"></div>
+
+            <div class="panel-heading" >
+                <span>评论区</span>
+            </div>
+            <!--评论区-->
+            <div th:each="comment:${post.comments}" class="panel panel-primary" style="margin:0">
+                <div class="panel-heading">
+                    <span th:text="${commentStat.count}+'楼'"></span>
+                    <span th:text="${comment.ownerNickName}"></span>
+                    <span th:if="${comment.ownerNickName==post.ownerNickName}">(楼主)</span>
+                    <span th:text="${#dates.format(comment.date,'yyyy-MM-dd &nbsp; HH:mm')}" style="float:right"/>
+                </div>
+                <div class="panel-body" th:text="${comment.content}" style="height:100px"></div>
+            </div>
+            <!--//评论区-->
+        </div>
+        <!--帖子-->
+    </div>
+
+</body>
+</html>

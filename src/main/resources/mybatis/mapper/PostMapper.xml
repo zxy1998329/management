@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.management.mapper.PostMapper">
+
+    <resultMap id="PostWithComment" type="com.management.entity.Post">
+        <result property="id" column="id"/>
+        <result property="ownerId" column="ownerId"/>
+        <result property="ownerNickName" column="postNickName"/>
+        <result property="title" column="title"/>
+        <result property="content" column="postContent"/>
+        <result property="date" column="postDate"/>
+        <result property="part" column="part"/>
+        <collection property="comments" ofType="com.management.entity.Comment" column="id">
+            <result property="ownerNickName" column="commentNickName"/>
+            <result property="content" column="commentContent"/>
+            <result property="date" column="commentDate"/>
+        </collection>
+    </resultMap>
+
+    <select id="findAllWithComment" resultMap="PostWithComment">
+        SELECT *
+        FROM post_comment
+    </select>
+
+    <select id="findByPart" resultMap="PostWithComment">
+        SELECT *
+        FROM post_comment
+        WHERE part = #{part}
+    </select>
+</mapper>

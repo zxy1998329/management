@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="commons::head(title=${notice==null}?'添加公告':'修改公告')"></head>
+<body>
+<div th:replace="commons::topper(uri='')"></div>
+<div style="width:30%;margin:0 auto">
+    <form th:action="@{/notice}" method="post">
+        <!--选择添加还是修改的PUT和POST-->
+        <input type="hidden" name="_method" value="put" th:if="${notice!=null}">
+        <!--把id也提交上去，方便controller修改-->
+        <input  type="hidden" name="id" th:value="${notice.id}" th:if="${notice!=null}">
+        <!--标题-->
+        <div class="page-header">
+            <h4>标题</h4>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlInput1"></label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" th:value="${notice!=null}?${notice.title}" name="title">
+        </div>
+
+        <!--内容-->
+        <div class="page-header">
+            <h4>内容</h4>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1"></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" th:text="${notice!=null}?${notice.content}" name="content"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" th:text="${notice!=null}?'修改':'添加'">添加</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="commons::head(title=${account==null}?'添加账号':'编辑账号')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='pay')"></div>
+<!-- //整个导航栏 -->
+    <div style="height:600px ;width:50%; margin:0 auto">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form th:action="@{/account}" method="post">
+                <!--发送put请求修改账号数据-->
+                <!--
+                1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+                2、页面创建一个post表单
+                3、创建一个input项，name="_method";值就是我们指定的请求方式
+                -->
+                <input type="hidden" name="_method" value="PUT" th:if="${account!=null}"/>
+                <input type="hidden" name="id" th:if="${account!=null}" th:value="${account.id}">
+                <div class="form-group">
+                    <label>真实姓名</label>
+                    <input name="realName" type="text" class="form-control" th:value="${account!=null}?${account.realName}">
+                </div>
+                <div class="form-group">
+                    <label>昵称</label>
+                    <input name="nickName" type="text" class="form-control" th:value="${account!=null}?${account.nickName}">
+                </div>
+                <div class="form-group">
+                    <label>用户名</label>
+                    <input name="userName" type="text" class="form-control" th:value="${account!=null}?${account.userName}">
+                </div>
+                <div class="form-group">
+                    <label>密码</label>
+                    <input name="passWord" type="text" class="form-control" th:value="${account!=null}?${account.passWord}">
+                </div>
+                <div class="form-group">
+                    <label>楼栋-层数-门牌号</label>
+                    <input name="address" type="text" class="form-control" th:value="${account!=null}?${account.address}">
+                </div>
+                <button type="submit" class="btn btn-primary" th:text="${account!=null}?'修改':'添加'"></button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>

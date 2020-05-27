@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='我的帖子')"></head>
+<body>
+<div th:replace="commons::topper(uri='post')"></div>
+
+    <div style="width:60%; margin:0 auto;">
+        <!--选择板块-->
+        <div>
+            <a class="btn btn-default navbar-btn" href="/post">添加帖子</a>
+        </div>
+        <!--选择板块-->
+
+        <!--帖子-->
+        <div class="panel panel-default" style="height:400px; width:40%; float:left; margin:0 10px" th:each="post:${posts}">
+            <a class="btn btn-sm btn-primary" th:href="@{/post/}+${post.id}" th:if="${post.ownerId==session.id}">修改</a>
+            <form th:action="@{/post/}+${post.id}" method="post" style="display:inline-block; ">
+                <input type="hidden" name="_method" value="delete"/>
+                <button type="submit" class="btn btn-sm btn-danger">删除</button>
+            </form>
+
+            <div class="panel-heading" th:text="'发帖人：'+${post.ownerNickName}"></div>
+            <div class="panel-heading" th:text="'标题：'+${post.title}"></div>
+            <div class="panel-heading" th:text="'发帖时间：'+${#dates.format(post.date,'yyyy-MM-dd/HH:mm')}"></div>
+            <div class="panel-heading" th:text="板块：小区事儿" th:if="${post.part==1}"></div>
+            <div class="panel-heading" th:text="板块：交友互助" th:if="${post.part==2}"></div>
+            <div class="panel-heading" th:text="板块：兴趣圈子" th:if="${post.part==3}"></div>
+            <div class="panel-body" th:text="${post.content}"></div>
+        </div>
+        <!--帖子-->
+    </div>
+</body>
+</html>

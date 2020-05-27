@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='留言板')"></head>
+<body>
+<div th:replace="commons::topper(uri='post')"></div>
+
+    
+    <div class="panel panel-default" style="height:400px; width:350px;float:left;" th:each="liuyan:${liuyans}">
+        <form th:action="@{/liuyan/}+${liuyan.id}" method="post" style="display:inline-block; ">
+            <input type="hidden" name="_method" value="delete"/>
+            <button type="submit" class="btn btn-sm btn-danger">删除</button>
+        </form>
+
+        <div class="panel-heading" th:text="'用户：'+${liuyan.leaveUserName}"></div>
+        <div class="panel-heading" th:text="'相关帖子：'+${liuyan.postTitle}"></div>
+        <div class="panel-heading" th:text="'时间：'+${#dates.format(liuyan.date,'yyyy-MM-dd/HH:mm')}"></div>
+        <div class="panel-body" th:text="${liuyan.content}"></div>
+    </div>
+</body>
+</html>

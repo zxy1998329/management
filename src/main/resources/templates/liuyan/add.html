@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:replace="commons::head(title='给他留言')"></head>
+    <title>主页</title>
+
+</head>
+<body>
+<div th:replace="commons::topper(uri='post')"></div>
+<div style="width:30%;margin:0 auto">
+    <form th:action="@{/liuyan}" method="post">
+        <input type="hidden" name="ownerId" th:value="${ownerId}">
+        <input type="hidden" name="postTitle" th:value="${postTitle}">
+        <!--内容-->
+        <div class="page-header">
+            <h4>内容</h4>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1"></label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" name="content"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">发送</button>
+    </form>
+</div>
+
+</body>
+</html>

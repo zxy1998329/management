@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="commons::head(title='添加车辆')"></head>
+<body>
+<!-- 整个导航栏 -->
+<div th:replace="commons::topper(uri='car')"></div>
+<!-- //整个导航栏 -->
+    <div style="height:50px"></div>
+    <div style="height:600px; width:50%; margin:0 auto">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <form th:action="@{/car}" method="post">
+                <!--发送put请求修改账号数据-->
+                <!--
+                1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+                2、页面创建一个post表单
+                3、创建一个input项，name="_method";值就是我们指定的请求方式
+                -->
+                <input type="hidden" name="_method" value="PUT" th:if="${car!=null}"/>
+                <input type="hidden" name="id" th:if="${car!=null}" th:value="${car.id}">
+                <!--这一栏在添加的时候才有-->
+                <div class="form-group" th:if="${accounts!=null}">
+                    <label>拥有人</label>
+                    <select class="form-control" name="ownerUserName">
+                        <option th:each="account:${accounts}" th:value="${account.userName}" th:text="${account.userName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>牌照号</label>
+                    <input name="license" type="text" class="form-control" th:value="${car!=null}?${car.license}">
+                </div>
+                <div class="form-group">
+                    <label>车辆品牌</label>
+                    <input name="brand" type="text" class="form-control" th:value="${car!=null}?${car.brand}">
+                </div>
+                <div class="form-group">
+                    <label>车辆颜色</label>
+                    <select class="form-control" name="color">
+                        <option value="red" th:selected="${car!=null}?${car.color}=='red'">红色</option>
+                        <option value="orange" th:selected="${car!=null}?${car.color}=='orange'">橙色</option>
+                        <option value="yellow" th:selected="${car!=null}?${car.color}=='yellow'">黄色</option>
+                        <option value="green" th:selected="${car!=null}?${car.color}=='green'">绿色</option>
+                        <option value="black" th:selected="${car!=null}?${car.color}=='black'">黑色</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" th:text="${car!=null}?'修改':'添加'"></button>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
