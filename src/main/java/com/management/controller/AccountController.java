@@ -76,6 +76,4 @@ public class AccountController {
         accountMapper.deleteAccountById(id);
         return "redirect:/accounts";
     }
-
-
 }

@@ -16,6 +16,6 @@ public class Myconfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry){
         //设置登陆拦截器
         registry.addInterceptor(new LoginHandlerInterceptor()).addPathPatterns("/**").
-                excludePathPatterns("/","/loginController","/assets/**","/test");
+                excludePathPatterns("/","/loginController","/assets/**","/test","/test/**");
     }
 }
